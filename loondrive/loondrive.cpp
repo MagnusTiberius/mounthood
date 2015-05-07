@@ -2,12 +2,13 @@
 //
 
 #include "stdafx.h"
-#include "FileController.h"
+#include "SystemDB.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	FileController fileController;
-	fileController.Init(L"SystemDB.dat", 1024);
+	SystemDB systemDB;
+	systemDB.InitSystem();
+	systemDB.InitHeader();
 	return 0;
 }
 

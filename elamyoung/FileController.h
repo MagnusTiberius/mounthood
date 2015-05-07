@@ -37,7 +37,32 @@ public:
 
 	}
 
+	HANDLE Open(_In_ LPCTSTR lpFileName)
+	{
+		hFile = HCreateFile(lpFileName,
+			GENERIC_READ | GENERIC_WRITE,
+			FILE_SHARE_READ,
+			NULL,
+			OPEN_ALWAYS,
+			FILE_ATTRIBUTE_NORMAL,
+			NULL);
+		return hFile;
+	}
+
+	void Write(_In_ LPCVOID lpBuffer, _In_ DWORD len)
+	{
+		DWORD dwWritten;
+		BOOL b = HWriteFile(hFile, lpBuffer, len, &dwWritten, NULL);
+	}
+
+	BOOL Close()
+	{
+		return ::CloseHandle(hFile);
+	}
+
 protected:
+	HFILE hf;
+
 	HANDLE hFile;
 	SYSTEM_INFO SysInfo;
 	DWORD dwSysGran;
