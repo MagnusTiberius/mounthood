@@ -11,6 +11,12 @@
 // Windows Header Files:
 #include <windows.h>
 
+#include "FileAPI.h"
 
+#ifdef ELAMYOUNG_EXPORTS
+#define DECL_API __declspec(dllexport)
+#else
+#define DECL_API __declspec(dllimport)
+#endif
 
 // TODO: reference additional headers your program requires here

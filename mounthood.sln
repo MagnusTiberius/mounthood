@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mounthood", "mounthood.vcxproj", "{C1AC02DC-2D49-4DBC-928B-C13D3BE90730}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loondrive", "loondrive\loondrive.vcxproj", "{EED547A1-4804-4EFC-9B4E-F7EC4D5844FD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "elamyoung", "elamyoung\elamyoung.vcxproj", "{BE0A0CB2-9727-403A-B6EB-8D9B8BF63FBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C1AC02DC-2D49-4DBC-928B-C13D3BE90730}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C1AC02DC-2D49-4DBC-928B-C13D3BE90730}.Debug|Win32.Build.0 = Debug|Win32
-		{C1AC02DC-2D49-4DBC-928B-C13D3BE90730}.Release|Win32.ActiveCfg = Release|Win32
-		{C1AC02DC-2D49-4DBC-928B-C13D3BE90730}.Release|Win32.Build.0 = Release|Win32
+		{EED547A1-4804-4EFC-9B4E-F7EC4D5844FD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EED547A1-4804-4EFC-9B4E-F7EC4D5844FD}.Debug|Win32.Build.0 = Debug|Win32
+		{EED547A1-4804-4EFC-9B4E-F7EC4D5844FD}.Release|Win32.ActiveCfg = Release|Win32
+		{EED547A1-4804-4EFC-9B4E-F7EC4D5844FD}.Release|Win32.Build.0 = Release|Win32
+		{BE0A0CB2-9727-403A-B6EB-8D9B8BF63FBD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BE0A0CB2-9727-403A-B6EB-8D9B8BF63FBD}.Debug|Win32.Build.0 = Debug|Win32
+		{BE0A0CB2-9727-403A-B6EB-8D9B8BF63FBD}.Release|Win32.ActiveCfg = Release|Win32
+		{BE0A0CB2-9727-403A-B6EB-8D9B8BF63FBD}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
