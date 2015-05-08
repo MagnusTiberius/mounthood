@@ -12,6 +12,7 @@ public:
 	~FileController();
 
 	void Init(_In_ LPCTSTR lpFileName, _In_ INT nBufferSize);
+	void InitByGranularity(_In_ LPCTSTR lpFileName, _In_ INT multiplier);
 	HANDLE Open(_In_ LPCTSTR lpFileName);
 	void Write(_In_ LPCVOID lpBuffer, _In_ DWORD len);
 	BOOL Close();

@@ -14,6 +14,7 @@ SystemDB::~SystemDB()
 void SystemDB::InitSystem()
 {
 	fileController.Init(SYSDB, 1024);
+	fileController.InitByGranularity(SYSDB, 128);
 }
 
 void SystemDB::OpenSystemDB()

@@ -34,6 +34,14 @@ void FileController::Init(_In_ LPCTSTR lpFileName, _In_ INT nBufferSize)
 
 }
 
+void FileController::InitByGranularity(_In_ LPCTSTR lpFileName, _In_ INT multiplier)
+{
+	GetSystemInfo(&SysInfo);
+	dwSysGran = SysInfo.dwAllocationGranularity;
+	INT totalSize = multiplier * (INT)dwSysGran;
+	Init(lpFileName, totalSize);
+}
+
 HANDLE FileController::Open(_In_ LPCTSTR lpFileName)
 {
 	hFile = HCreateFile(lpFileName,
