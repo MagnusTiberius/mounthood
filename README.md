@@ -1,8 +1,10 @@
 # mounthood
 
-MountHood is project about memory mapped files. 
+Mount Hood is a mountain in Oregon.
 
-Basically explore the area where multi-core architecture and memory mapping are happening.
+Named after the mountain, the project aims to develop and deliver a working Database System.
+
+
 
 Continuous Integration:
 
