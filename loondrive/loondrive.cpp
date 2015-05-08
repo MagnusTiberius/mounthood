@@ -5,6 +5,7 @@
 #include "SystemDB.h"
 #include "SuperBlock.h"
 #include "FileController.h"
+#include "Bitmap.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -20,6 +21,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	DWORD m = fileController.Read(&aBlock,n,0);
 	fileController.Close();
 
+	Bitmap bitmap;
+	bitmap.SetBitmapSize(aBlock.dwINodeBitmapAreaSize);
+	bitmap.SetStartAddress(aBlock.dwINodeBitmapStartAddress);
+	bitmap.Load();
 	exit(0);
 	return 0;
 }

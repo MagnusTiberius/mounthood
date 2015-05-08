@@ -71,8 +71,8 @@ void FileController::Write(_In_ LPCVOID lpBuffer, _In_ DWORD len, _In_ DWORD dwS
 
 DWORD FileController::Read(_In_ LPVOID lpBuffer, _In_ DWORD len, _In_ DWORD dwStartAddress)
 {
-	DWORD dwRead;
-	::SetFilePointer(hFile, dwStartAddress, NULL, FILE_BEGIN);
+	DWORD dwRead = 0;
+	DWORD rv = ::SetFilePointer(hFile, dwStartAddress, NULL, FILE_BEGIN);
 	BOOL b = ::ReadFile(hFile, lpBuffer, len, &dwRead, NULL);
 	return dwRead;
 }
