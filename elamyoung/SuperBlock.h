@@ -1,4 +1,5 @@
 #pragma once
+#include "FileController.h"
 
 #define EIGHTKILO 8192
 
@@ -16,6 +17,7 @@ public:
 		DWORD dwSuperBlockAreaSize;
 		DWORD dwBitmapAreaSize;
 		DWORD dwINodeAreaSize;
+		DWORD dwBytesPerBlock;
 	} SUPERBLOCK, *LPSUPERBLOCK;
 
 
@@ -26,8 +28,13 @@ private:
 	DWORD dwSuperBlockAreaSize;
 	DWORD dwBitmapAreaSize;
 	DWORD dwINodeAreaSize;
+	DWORD dwBytesPerBlock;
 
 	SUPERBLOCK m_SuperBlock;
+
+	DWORD dwSuperBlockStartAddress;
+	DWORD dwINodeStartAddress;
+	DWORD dwBitmapStartAddress;
 
 };
 

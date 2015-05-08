@@ -3,7 +3,7 @@
 #include "FileController.h"
 #include "SuperBlock.h"
 
-#define SYSDB L"SystemDB.dat"
+
 
 class DECL_API SystemDB
 {
