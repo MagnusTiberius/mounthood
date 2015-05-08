@@ -13,8 +13,8 @@ SystemDB::~SystemDB()
 
 void SystemDB::InitSystem()
 {
-	fileController.Init(SYSDB, 1024);
-	fileController.InitByGranularity(SYSDB, 128);
+	dwSizeSystemDB = fileController.CreateByGranularity(SYSDB, 256);
+	superBlock.Init(dwSizeSystemDB);
 }
 
 void SystemDB::OpenSystemDB()
@@ -22,6 +22,7 @@ void SystemDB::OpenSystemDB()
 	fileController.Open(SYSDB);
 }
 
+// testing
 void SystemDB::InitHeader()
 {
 	size_t siz = 8;

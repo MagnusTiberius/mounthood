@@ -1,6 +1,7 @@
 #pragma once
 
 #include "FileController.h"
+#include "SuperBlock.h"
 
 #define SYSDB L"SystemDB.dat"
 
@@ -15,6 +16,9 @@ public:
 		DWORD num;
 	} HEADER_INFO, LPHEADER_INFO;
 
+
+
+
 	void InitSystem();
 	void OpenSystemDB();
 
@@ -23,5 +27,9 @@ public:
 private:
 	FileController fileController;
 	HANDLE hFile;
+	DWORD dwSizeSystemDB;
+
+	SuperBlock superBlock;
+
 };
 

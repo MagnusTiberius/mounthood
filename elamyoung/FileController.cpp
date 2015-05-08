@@ -12,7 +12,7 @@ FileController::~FileController()
 }
 
 
-void FileController::Init(_In_ LPCTSTR lpFileName, _In_ INT nBufferSize)
+void FileController::Create(_In_ LPCTSTR lpFileName, _In_ DWORD nBufferSize)
 {
 	hFile = HCreateFile(lpFileName,
 		GENERIC_READ | GENERIC_WRITE,
@@ -34,12 +34,14 @@ void FileController::Init(_In_ LPCTSTR lpFileName, _In_ INT nBufferSize)
 
 }
 
-void FileController::InitByGranularity(_In_ LPCTSTR lpFileName, _In_ INT multiplier)
+DWORD FileController::CreateByGranularity(_In_ LPCTSTR lpFileName, _In_ DWORD multiplier)
 {
 	GetSystemInfo(&SysInfo);
 	dwSysGran = SysInfo.dwAllocationGranularity;
-	INT totalSize = multiplier * (INT)dwSysGran;
-	Init(lpFileName, totalSize);
+	DWORD totalSize = multiplier * dwSysGran;
+	assert(totalSize > 0);
+	Create(lpFileName, totalSize);
+	return totalSize;
 }
 
 HANDLE FileController::Open(_In_ LPCTSTR lpFileName)

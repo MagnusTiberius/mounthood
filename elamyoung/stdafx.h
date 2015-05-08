@@ -15,6 +15,9 @@
 #include <tchar.h>
 #include "FileAPI.h"
 
+#include <cassert>
+#include <assert.h> 
+
 #ifdef ELAMYOUNG_EXPORTS
 #define DECL_API __declspec(dllexport)
 #else
