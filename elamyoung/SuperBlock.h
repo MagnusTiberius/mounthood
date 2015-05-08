@@ -18,6 +18,9 @@ public:
 		DWORD dwBitmapAreaSize;
 		DWORD dwINodeAreaSize;
 		DWORD dwBytesPerBlock;
+		DWORD dwSuperBlockStartAddress;
+		DWORD dwINodeStartAddress;
+		DWORD dwBitmapStartAddress;
 	} SUPERBLOCK, *LPSUPERBLOCK;
 
 

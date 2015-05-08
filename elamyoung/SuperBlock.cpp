@@ -34,4 +34,8 @@ void SuperBlock::Init(_In_ DWORD dwSize)
 	m_SuperBlock.dwBytesPerBlock = dwBytesPerBlock;
 	m_SuperBlock.totalBlockSize = totalBlockSize;
 
+	m_SuperBlock.dwSuperBlockStartAddress = dwSuperBlockStartAddress;
+	m_SuperBlock.dwINodeStartAddress = dwINodeStartAddress;
+	m_SuperBlock.dwBitmapStartAddress = dwBitmapStartAddress;
+
 }
