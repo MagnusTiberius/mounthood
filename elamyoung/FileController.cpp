@@ -28,11 +28,7 @@ void FileController::Init(_In_ LPCTSTR lpFileName, _In_ INT nBufferSize)
 	CHAR *buffer = (CHAR*)malloc(nBufferSize);
 	memset(buffer, 32, nBufferSize);
 
-	//for (i = 0; i<nBufferSize; i++)
-	//{
-	//	WriteFile(hFile, buffer, nBufferSize, &dBytesWritten, NULL);
-	//}
-	WriteFile(hFile, buffer, nBufferSize, &dBytesWritten, NULL);
+	HWriteFile(hFile, buffer, nBufferSize, &dBytesWritten, NULL);
 
 	CloseHandle(hFile);
 
