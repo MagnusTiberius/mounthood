@@ -39,6 +39,9 @@
     <ClInclude Include="SuperBlock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Inode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -60,6 +63,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SuperBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Inode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

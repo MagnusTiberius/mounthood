@@ -21,7 +21,18 @@ void SuperBlock::Init(_In_ DWORD dwSize)
 	dwSizeSystemDB = dwSize;
 	DWORD dwHeaderSize = dwSuperBlockAreaSize + dwBitmapAreaSize + dwINodeAreaSize;
 	assert(dwSizeSystemDB > dwHeaderSize);
+
 	totalBlockSize = (dwSizeSystemDB - dwHeaderSize) / dwBytesPerBlock;
+
+	while (dwBitmapAreaSize < totalBlockSize)
+	{
+		dwBitmapAreaSize = dwBitmapAreaSize + (EIGHTKILO / 2);
+		dwHeaderSize = dwSuperBlockAreaSize + dwBitmapAreaSize + dwINodeAreaSize;
+		assert(dwSizeSystemDB > dwHeaderSize);
+		totalBlockSize = (dwSizeSystemDB - dwHeaderSize) / dwBytesPerBlock;
+	}
+
+	assert(dwBitmapAreaSize >= totalBlockSize);
 
 	dwSuperBlockStartAddress = 0;
 	dwINodeStartAddress = dwSuperBlockStartAddress + dwSuperBlockAreaSize;

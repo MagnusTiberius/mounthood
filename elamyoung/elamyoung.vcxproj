@@ -88,6 +88,7 @@
     <ClInclude Include="elamyoung.h" />
     <ClInclude Include="FileController.h" />
     <ClInclude Include="FileSemantic.h" />
+    <ClInclude Include="Inode.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SuperBlock.h" />
     <ClInclude Include="SystemDB.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="elamyoung.cpp" />
     <ClCompile Include="FileController.cpp" />
     <ClCompile Include="FileSemantic.cpp" />
+    <ClCompile Include="Inode.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
