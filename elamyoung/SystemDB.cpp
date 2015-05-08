@@ -15,6 +15,13 @@ void SystemDB::InitSystem()
 {
 	dwSizeSystemDB = fileController.CreateByGranularity(SYSDB, 256);
 	superBlock.Init(dwSizeSystemDB);
+	SuperBlock::LPSUPERBLOCK lpBlock =  superBlock.GetSuperBlock();
+	fileController.Open(SYSDB);
+	fileController.Write((LPVOID)lpBlock, sizeof(SuperBlock::SUPERBLOCK), lpBlock->dwSuperBlockStartAddress);
+	free(lpBlock);
+	lpBlock = NULL;
+	fileController.Close();
+
 }
 
 void SystemDB::OpenSystemDB()

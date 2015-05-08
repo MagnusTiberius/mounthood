@@ -3,7 +3,7 @@
 
 #define EIGHTKILO 8192
 
-class SuperBlock
+class DECL_API SuperBlock
 {
 public:
 	SuperBlock();
@@ -15,29 +15,40 @@ public:
 		DWORD totalBlockSize;
 		DWORD dwSizeSystemDB;
 		DWORD dwSuperBlockAreaSize;
-		DWORD dwBitmapAreaSize;
+		DWORD dwSuperBlockBitmapAreaSize;
 		DWORD dwINodeAreaSize;
 		DWORD dwBytesPerBlock;
 		DWORD dwSuperBlockStartAddress;
 		DWORD dwINodeStartAddress;
-		DWORD dwBitmapStartAddress;
+		DWORD dwSuperBlockBitmapStartAddress;
+		DWORD dwINodeBitmapAreaSize;
+		DWORD dwINodeBitmapStartAddress;
 	} SUPERBLOCK, *LPSUPERBLOCK;
 
+	const LPSUPERBLOCK GetSuperBlock();
 
 private:
 	DWORD totalBlockSize;
-	CHAR *bitmap;
 	DWORD dwSizeSystemDB;
+	CHAR *bitmap;
+
 	DWORD dwSuperBlockAreaSize;
-	DWORD dwBitmapAreaSize;
+	DWORD dwSuperBlockBitmapAreaSize;
+
 	DWORD dwINodeAreaSize;
+	DWORD dwINodeBitmapAreaSize;
+
 	DWORD dwBytesPerBlock;
 
 	SUPERBLOCK m_SuperBlock;
 
 	DWORD dwSuperBlockStartAddress;
+	DWORD dwSuperBlockBitmapStartAddress;
+
 	DWORD dwINodeStartAddress;
-	DWORD dwBitmapStartAddress;
+	DWORD dwINodeBitmapStartAddress;
+
+	HANDLE hMutex;
 
 };
 

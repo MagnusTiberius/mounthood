@@ -8,16 +8,22 @@ public:
 	~Inode();
 
 	enum INODETYPE {
-		INODETYPE_TABLE,
-		INODETYPE_INDEX,
-		INODETYPE_TABLEDEF,
-		INODETYPE_INDEXDEF,
+		INODETYPE_UNDEFINED = 0,
+		INODETYPE_SYSTABLE = 1,
+		INODETYPE_TABLE = 2,
+		INODETYPE_INDEX = 4,
+		INODETYPE_TABLEDEF = 8,
+		INODETYPE_INDEXDEF = 16,
 	};
 
+	// An INode is 256 bytes long.
 	typedef struct INode_s {
 		INODETYPE enInodeType;
 		DWORD dwStartAddress;
-		HANDLE hMutex;
+		DWORD dwBlockCount;
+		DWORD bIsLocked;
+		DWORD dwReaderCount;
+		DWORD dwWriterWaitingFlag;
 	} INODE, *LPINODE;
 
 private:

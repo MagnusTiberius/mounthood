@@ -26,7 +26,7 @@ void FileController::Create(_In_ LPCTSTR lpFileName, _In_ DWORD nBufferSize)
 	dwSysGran = SysInfo.dwAllocationGranularity;
 
 	CHAR *buffer = (CHAR*)malloc(nBufferSize);
-	memset(buffer, 32, nBufferSize);
+	memset(buffer, 0, nBufferSize);
 
 	HWriteFile(hFile, buffer, nBufferSize, &dBytesWritten, NULL);
 	free(buffer);
@@ -61,6 +61,22 @@ void FileController::Write(_In_ LPCVOID lpBuffer, _In_ DWORD len)
 	DWORD dwWritten;
 	BOOL b = HWriteFile(hFile, lpBuffer, len, &dwWritten, NULL);
 }
+
+void FileController::Write(_In_ LPCVOID lpBuffer, _In_ DWORD len, _In_ DWORD dwStartAddress)
+{
+	DWORD dwWritten;
+	::SetFilePointer(hFile, dwStartAddress, NULL, FILE_BEGIN);
+	BOOL b = HWriteFile(hFile, lpBuffer, len, &dwWritten, NULL);
+}
+
+DWORD FileController::Read(_In_ LPVOID lpBuffer, _In_ DWORD len, _In_ DWORD dwStartAddress)
+{
+	DWORD dwRead;
+	::SetFilePointer(hFile, dwStartAddress, NULL, FILE_BEGIN);
+	BOOL b = ::ReadFile(hFile, lpBuffer, len, &dwRead, NULL);
+	return dwRead;
+}
+
 
 BOOL FileController::Close()
 {

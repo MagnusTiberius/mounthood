@@ -3,12 +3,24 @@
 
 #include "stdafx.h"
 #include "SystemDB.h"
+#include "SuperBlock.h"
+#include "FileController.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	SystemDB systemDB;
 	systemDB.InitSystem();
-	systemDB.InitHeader();
+
+	SuperBlock superBlock;
+	FileController fileController;
+	SuperBlock::SUPERBLOCK aBlock;
+	size_t n = sizeof(SuperBlock::SUPERBLOCK);
+	memset(&aBlock, 0, n);
+	fileController.Open(SYSDB);
+	DWORD m = fileController.Read(&aBlock,n,0);
+	fileController.Close();
+
+	exit(0);
 	return 0;
 }
 
