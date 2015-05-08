@@ -35,4 +35,5 @@ void SystemDB::InitHeader()
 	fileController.Open(SYSDB);
 	fileController.Write((LPCVOID)buf, siz2);
 	fileController.Close();
+	free(buf);
 }

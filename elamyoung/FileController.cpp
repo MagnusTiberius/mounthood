@@ -29,7 +29,7 @@ void FileController::Init(_In_ LPCTSTR lpFileName, _In_ INT nBufferSize)
 	memset(buffer, 32, nBufferSize);
 
 	HWriteFile(hFile, buffer, nBufferSize, &dBytesWritten, NULL);
-
+	free(buffer);
 	CloseHandle(hFile);
 
 }
