@@ -16,7 +16,7 @@ public:
 	HANDLE Open(_In_ LPCTSTR lpFileName);
 	VOID Write(_In_ LPCVOID lpBuffer, _In_ DWORD len);
 	VOID Write(_In_ LPCVOID lpBuffer, _In_ DWORD len, _In_ DWORD dwStartAddress);
-	DWORD Read(_In_ LPVOID lpBuffer, _In_ DWORD len, _In_ DWORD dwStartAddress);
+	DWORD Read(_Inout_ LPVOID lpBuffer, _In_ DWORD len, _In_ DWORD dwStartAddress);
 	BOOL Close();
 
 protected:

@@ -13,12 +13,16 @@ public:
 		CHAR *bitmap;
 	} BITMAP, *LPBITMAP;
 
-	DWORD GetStartAddressBlock(size_t nBlocks);
-	VOID SetStartAddress(DWORD dwStartAddress);
+	DWORD GetStartAddressBlock(_In_ size_t nBlocks);
+	VOID SetStartAddress(_In_ DWORD dwStartAddress);
 	DWORD GetStartAddress();
 	VOID Load();
+	VOID Save();
 	DWORD GetBitmapSize();
-	VOID SetBitmapSize(DWORD dwSize);
+	VOID SetBitmapSize(_In_ DWORD dwSize);
+	VOID SetFileName(_In_ LPCTSTR name);
+	DWORD FindAddressBlockToReserve(_In_ DWORD dwCount);
+	DWORD ReserveBlock(_In_ DWORD dwIndex, _In_ DWORD dwCount);
 
 private:
 	BYTE *m_lpbitmap;
@@ -26,7 +30,10 @@ private:
 	FileController fileController;
 	DWORD m_dwStartAddress;
 
-	VOID LoadBitmapM(LPVOID lpbitmap, DWORD size, DWORD dwStartAddress);
+	VOID LoadBitmapM(_Inout_ LPVOID lpbitmap, _In_ DWORD size, _In_ DWORD dwStartAddress);
+	VOID SaveBitmapM(_Inout_ LPVOID lpbitmap, _In_ DWORD size, _In_ DWORD dwStartAddress);
+
+	LPCTSTR m_fileName;
 
 };
 
