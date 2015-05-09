@@ -65,7 +65,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	assert(dwAddress4 == 66);
 	bitmap2.Save();
 
-
+	//
+	// Test bitmap heap. Try to reserve blocks.
+	//
 	Bitmap bitmapHeap;
 	bitmapHeap.SetFileName(SYSDB);
 	DWORD addr = superBlock2.GetHeapStartAddress();
@@ -80,11 +82,20 @@ int _tmain(int argc, _TCHAR* argv[])
 	DWORD dwValidBlockCount = bitmapHeap.ReserveBlock(dwIndex, dwBlocks);
 	bitmapHeap.Save();
 
+	//
+	// Try to reserve an inode.
+	//
+	Inode::INODE m_inode, m_inode1, m_inode2, m_inode3;
+	size_t n2 = sizeof(Inode::INODE);
+	memset(&m_inode,0,n2);
+	memset(&m_inode1, 0, n2);
+	memset(&m_inode2, 0, n2);
+	memset(&m_inode3, 0, n2);
 	Inode inode;
-	inode.Reserve(43123);
-	inode.Reserve(69366);
-
-	#include "Inode.h"
+	inode.Reserve(43123, &m_inode);
+	inode.Reserve(412456, &m_inode1);
+	inode.Reserve(5876987, &m_inode2);
+	inode.Reserve(8768, &m_inode3);
 
 	exit(0);
 

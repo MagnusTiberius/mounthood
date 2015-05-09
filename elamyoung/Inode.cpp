@@ -29,7 +29,7 @@ Inode::~Inode()
 }
 
 
-bool Inode::Reserve(DWORD dwSizeInBytes)
+bool Inode::Reserve(DWORD dwSizeInBytes, Inode::LPINODE lpInode)
 {
 	DWORD dwBlocks = (dwSizeInBytes / 4096) + 1;
 	DWORD dwIndex = bitmapHeap.FindAddressBlockToReserve(dwBlocks);
@@ -39,5 +39,10 @@ bool Inode::Reserve(DWORD dwSizeInBytes)
 	DWORD dwIndex2 = bitmapInode.FindAddressBlockToReserve(1);
 	DWORD dwValidBlockCount2 = bitmapInode.ReserveBlock(dwIndex2, 1);
 	bitmapInode.Save();
+
+	lpInode->dwStartBitmapHeapAddress = dwIndex;
+	lpInode->dwStartBitmapHeapReserveCount = dwValidBlockCount;
+	lpInode->dwStartInodeBitmapAddress = dwIndex2;
+
 	return true;
 }

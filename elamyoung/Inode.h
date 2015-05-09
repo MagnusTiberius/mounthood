@@ -22,13 +22,15 @@ public:
 	typedef struct INode_s {
 		INODETYPE enInodeType;
 		DWORD dwStartAddress;
-		DWORD dwBlockCount;
+		DWORD dwStartBitmapHeapAddress;
+		DWORD dwStartBitmapHeapReserveCount;
+		DWORD dwStartInodeBitmapAddress;
 		DWORD bIsLocked;
 		DWORD dwReaderCount;
 		DWORD dwWriterWaitingFlag;
 	} INODE, *LPINODE;
 
-	bool Reserve(DWORD dwSizeInBytes);
+	bool Reserve(DWORD dwSizeInBytes, Inode::LPINODE lpInode);
 
 private:
 
