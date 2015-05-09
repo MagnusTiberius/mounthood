@@ -4,6 +4,8 @@
 Bitmap::Bitmap()
 {
 	m_lpbitmap = NULL;
+	m_nBitmapSize = 0;
+	m_dwStartAddress = -1;
 }
 
 
@@ -114,5 +116,5 @@ DWORD Bitmap::ReserveBlock(_In_ DWORD dwIndex, _In_ DWORD dwCount)
 	{
 		m_lpbitmap[i] = 1;
 	}
-	return 0;
+	return dwCount;
 }

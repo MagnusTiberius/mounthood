@@ -1,7 +1,9 @@
 #pragma once
 #include "stdafx.h"
+#include "Bitmap.h"
+#include "SuperBlock.h"
 
-class Inode
+class DECL_API Inode
 {
 public:
 	Inode();
@@ -26,9 +28,16 @@ public:
 		DWORD dwWriterWaitingFlag;
 	} INODE, *LPINODE;
 
+	bool Reserve(DWORD dwSizeInBytes);
+
 private:
 
 	LPINODE lpInodes;
+	Bitmap bitmapInode;
+	Bitmap bitmapHeap;
+	SuperBlock superBlock;
+	DWORD dwINodeStartAddress;
+	DWORD dwINodeAreaSize;
 
 };
 

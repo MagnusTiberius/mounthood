@@ -6,6 +6,7 @@
 #include "SuperBlock.h"
 #include "FileController.h"
 #include "Bitmap.h"
+#include "Inode.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -23,9 +24,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	fileController.Open(SYSDB);
 	DWORD m = fileController.Read(&aBlock,n,0);
 	fileController.Close();
-
+	//superBlock.Load();
 	//
-	// Bitmap testing.
+	// Superblock now created, try reading it back.
+	//
+	SuperBlock superBlock2;
+	superBlock2.SetFileName(SYSDB);
+	superBlock2.Load();
+	SuperBlock::LPSUPERBLOCK aBlock2 = superBlock2.GetSuperBlock();
+	//
+	// INode Bitmap testing.
 	//
 	Bitmap bitmap;
 	bitmap.SetFileName(SYSDB);
@@ -45,16 +53,38 @@ int _tmain(int argc, _TCHAR* argv[])
 	bitmap.Save();
 
 	//
-	// Test if bitmap got saved, load it back and reserve more blocks.
+	// Test if INode bitmap got saved, load it back and reserve more blocks.
 	//
 	Bitmap bitmap2;
 	bitmap2.SetFileName(SYSDB);
 	bitmap2.SetBitmapSize(aBlock.dwINodeBitmapAreaSize);
 	bitmap2.SetStartAddress(aBlock.dwINodeBitmapStartAddress);
 	bitmap2.Load();
-	DWORD nSizeBitmap2 = bitmap.GetBitmapSize();
-	DWORD dwAddress4 = bitmap.FindAddressBlockToReserve(73);
-	bitmap.Save();
+	DWORD nSizeBitmap2 = bitmap2.GetBitmapSize();
+	DWORD dwAddress4 = bitmap2.FindAddressBlockToReserve(73);
+	assert(dwAddress4 == 66);
+	bitmap2.Save();
+
+
+	Bitmap bitmapHeap;
+	bitmapHeap.SetFileName(SYSDB);
+	DWORD addr = superBlock2.GetHeapStartAddress();
+	bitmapHeap.SetStartAddress(addr);
+	DWORD siz = superBlock2.GetHeapSize();
+	bitmapHeap.SetBitmapSize(siz);
+	bitmapHeap.Load();
+
+	DWORD dwSizeInBytes = 23864;
+	DWORD dwBlocks = (dwSizeInBytes / 4096) + 1;
+	DWORD dwIndex = bitmapHeap.FindAddressBlockToReserve(dwBlocks);
+	DWORD dwValidBlockCount = bitmapHeap.ReserveBlock(dwIndex, dwBlocks);
+	bitmapHeap.Save();
+
+	Inode inode;
+	inode.Reserve(43123);
+	inode.Reserve(69366);
+
+	#include "Inode.h"
 
 	exit(0);
 

@@ -23,9 +23,22 @@ public:
 		DWORD dwSuperBlockBitmapStartAddress;
 		DWORD dwINodeBitmapAreaSize;
 		DWORD dwINodeBitmapStartAddress;
+		DWORD dwHeapStartAddress;
+		DWORD dwHeapSize;
 	} SUPERBLOCK, *LPSUPERBLOCK;
 
 	const LPSUPERBLOCK GetSuperBlock();
+
+	DWORD GetINodeStartAddress();
+	DWORD GetINodeAreaSize();
+	DWORD GetINodeBitmapStartAddress();
+	DWORD GetINodeBitmapAreaSize();
+	DWORD GetHeapStartAddress();
+	DWORD GetHeapSize();
+
+	VOID SetFileName(_In_ LPCTSTR name);
+	VOID Load();
+	VOID Save();
 
 private:
 	DWORD totalBlockSize;
@@ -48,7 +61,12 @@ private:
 	DWORD dwINodeStartAddress;
 	DWORD dwINodeBitmapStartAddress;
 
-	HANDLE hMutex;
+	DWORD dwHeapStartAddress;
+	DWORD dwHeapSize;
 
+	HANDLE hMutex;
+	LPCTSTR m_fileName;
+
+	FileController fileController;
 };
 
