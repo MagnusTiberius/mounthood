@@ -28,6 +28,7 @@ public:
 	} SUPERBLOCK, *LPSUPERBLOCK;
 
 	const LPSUPERBLOCK GetSuperBlock();
+	VOID SetSuperBlock(LPSUPERBLOCK lpBlock);
 
 	DWORD GetINodeStartAddress();
 	DWORD GetINodeAreaSize();

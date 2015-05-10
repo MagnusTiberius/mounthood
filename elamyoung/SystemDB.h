@@ -23,12 +23,14 @@ public:
 	void OpenSystemDB();
 
 	void InitHeader();
+	DWORD SetSizeByGranularity(_In_ DWORD multiplier);
 
 private:
+	SYSTEM_INFO SysInfo;
 	FileController fileController;
 	HANDLE hFile;
 	DWORD dwSizeSystemDB;
-
+	DWORD dwSysGran;
 	SuperBlock superBlock;
 
 };

@@ -13,6 +13,12 @@ SuperBlock::~SuperBlock()
 }
 
 
+VOID SuperBlock::SetSuperBlock(LPSUPERBLOCK lpBlock)
+{
+	size_t n = sizeof(SUPERBLOCK);
+	memcpy_s(&m_SuperBlock, n, lpBlock, n);
+}
+
 void SuperBlock::Init(_In_ DWORD dwSize)
 {
 	dwSuperBlockAreaSize = EIGHTKILO;

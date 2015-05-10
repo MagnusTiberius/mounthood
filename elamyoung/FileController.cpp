@@ -14,6 +14,9 @@ FileController::~FileController()
 
 void FileController::Create(_In_ LPCTSTR lpFileName, _In_ DWORD nBufferSize)
 {
+	DWORD nFinalBufferSize;
+	DWORD nBlocks;
+	DWORD nValidBufferSize;
 	hFile = HCreateFile(lpFileName,
 		GENERIC_READ | GENERIC_WRITE,
 		0,
@@ -24,6 +27,18 @@ void FileController::Create(_In_ LPCTSTR lpFileName, _In_ DWORD nBufferSize)
 
 	GetSystemInfo(&SysInfo);
 	dwSysGran = SysInfo.dwAllocationGranularity;
+
+	if (nBufferSize < 1000000)
+	{
+		nValidBufferSize = (1024 * 1024);
+	}
+	else
+	{
+		nValidBufferSize = nBufferSize;
+	}
+
+	nBlocks = (nBufferSize / dwSysGran) + 1;
+	nFinalBufferSize = nBlocks * dwSysGran;
 
 	CHAR *buffer = (CHAR*)malloc(nBufferSize);
 	memset(buffer, 0, nBufferSize);
@@ -65,7 +80,7 @@ void FileController::Write(_In_ LPCVOID lpBuffer, _In_ DWORD len)
 void FileController::Write(_In_ LPCVOID lpBuffer, _In_ DWORD len, _In_ DWORD dwStartAddress)
 {
 	DWORD dwWritten;
-	::SetFilePointer(hFile, dwStartAddress, NULL, FILE_BEGIN);
+	DWORD rv = ::SetFilePointer(hFile, dwStartAddress, NULL, FILE_BEGIN);
 	BOOL b = HWriteFile(hFile, lpBuffer, len, &dwWritten, NULL);
 }
 

@@ -45,3 +45,12 @@ void SystemDB::InitHeader()
 	fileController.Close();
 	free(buf);
 }
+
+DWORD SystemDB::SetSizeByGranularity(_In_ DWORD multiplier)
+{
+	GetSystemInfo(&SysInfo);
+	dwSysGran = SysInfo.dwAllocationGranularity;
+	DWORD totalSize = multiplier * dwSysGran;
+	assert(totalSize > 0);
+	return totalSize;
+}
