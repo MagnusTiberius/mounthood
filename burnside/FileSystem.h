@@ -75,6 +75,25 @@ namespace burnside {
 
 		VOID GrowBy(_In_ DWORD dwSize);
 
+
+		VOID ReadInode(_In_ LPINODE lpNode, _In_ DWORD dwIndex)
+		{
+			DWORD displacement = dwIndex * sizeof(INODE);
+			DWORD effectiveAddress = superBlock.dwINodeStartAddress + displacement;
+			fc.Open(m_fileName);
+			fc.Read(lpNode, sizeof(INODE), effectiveAddress);
+			fc.Close();
+		}
+
+		VOID WriteInode(_In_ LPINODE lpNode, _In_ DWORD dwIndex)
+		{
+			DWORD displacement = dwIndex * sizeof(INODE);
+			DWORD effectiveAddress = superBlock.dwINodeStartAddress + displacement;
+			fc.Open(m_fileName);
+			fc.Read(lpNode, sizeof(INODE), effectiveAddress);
+			fc.Close();
+		}
+
 		VOID CreateTable(_In_ LPCTSTR name)
 		{
 			INODE inode;
