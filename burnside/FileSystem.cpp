@@ -87,4 +87,23 @@ namespace burnside {
 		return &superBlock;
 	}
 
+
+	VOID FileSystem::ReadInode(_In_ LPINODE lpNode, _In_ DWORD dwIndex)
+	{
+		DWORD displacement = dwIndex * sizeof(INODE);
+		DWORD effectiveAddress = superBlock.dwINodeStartAddress + displacement;
+		fc.Open(m_fileName);
+		fc.Read(lpNode, sizeof(INODE), effectiveAddress);
+		fc.Close();
+	}
+
+	VOID FileSystem::WriteInode(_In_ LPINODE lpNode, _In_ DWORD dwIndex)
+	{
+		DWORD displacement = dwIndex * sizeof(INODE);
+		DWORD effectiveAddress = superBlock.dwINodeStartAddress + displacement;
+		fc.Open(m_fileName);
+		fc.Write(lpNode, sizeof(INODE), effectiveAddress);
+		fc.Close();
+	}
+
 }

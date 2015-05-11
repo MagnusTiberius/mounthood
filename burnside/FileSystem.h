@@ -68,31 +68,11 @@ namespace burnside {
 		} FILESYSTEM, *LPFILESYSTEM;
 
 		VOID SetFileName(_In_ LPCTSTR name);
-
 		VOID Initialize(_In_ LPCTSTR name, _In_ DWORD dwSzie);
-
 		const LPSUPERBLOCK Allocate(_In_ DWORD dwSzie);
-
 		VOID GrowBy(_In_ DWORD dwSize);
-
-
-		VOID ReadInode(_In_ LPINODE lpNode, _In_ DWORD dwIndex)
-		{
-			DWORD displacement = dwIndex * sizeof(INODE);
-			DWORD effectiveAddress = superBlock.dwINodeStartAddress + displacement;
-			fc.Open(m_fileName);
-			fc.Read(lpNode, sizeof(INODE), effectiveAddress);
-			fc.Close();
-		}
-
-		VOID WriteInode(_In_ LPINODE lpNode, _In_ DWORD dwIndex)
-		{
-			DWORD displacement = dwIndex * sizeof(INODE);
-			DWORD effectiveAddress = superBlock.dwINodeStartAddress + displacement;
-			fc.Open(m_fileName);
-			fc.Read(lpNode, sizeof(INODE), effectiveAddress);
-			fc.Close();
-		}
+		VOID ReadInode(_In_ LPINODE lpNode, _In_ DWORD dwIndex);
+		VOID WriteInode(_In_ LPINODE lpNode, _In_ DWORD dwIndex);
 
 		VOID CreateTable(_In_ LPCTSTR name)
 		{
