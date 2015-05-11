@@ -128,6 +128,12 @@ namespace burnside {
 		fc.Close();
 	}
 
+	VOID FileSystem::Start(_In_ LPCTSTR name)
+	{
+		m_fileName = name;
+		Start();
+	}
+
 	VOID FileSystem::Start()
 	{
 		DWORD dwThreadId = GetCurrentThreadId();
@@ -143,8 +149,8 @@ namespace burnside {
 
 		for (i = 0; i < nThreads; i++)
 		{
-
-			if ((ThreadHandle = CreateThread(NULL, 0, ServerWorkerThread, this, 0, &ThreadID)) == NULL)
+			ThreadHandle = CreateThread(NULL, 0, ServerWorkerThread, this, 0, &ThreadID);
+			if (ThreadHandle == NULL)
 			{
 				fprintf(stderr, "%d::CreateThread() failed with error %d\n", dwThreadId, GetLastError());
 				return;
@@ -159,7 +165,7 @@ namespace burnside {
 
 	DWORD WINAPI FileSystem::ServerWorkerThread(LPVOID lpObject)
 	{
-
+		FileSystem *fs = (FileSystem*)lpObject;
 		while (TRUE)
 		{
 

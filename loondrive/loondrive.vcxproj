@@ -102,6 +102,17 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Test1.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\burnside\burnside.vcxproj">
+      <Project>{0a7eef33-b1a3-48ca-9ea4-4954b64b8521}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\elamyoung\elamyoung.vcxproj">
+      <Project>{be0a0cb2-9727-403a-b6eb-8d9b8bf63fbd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\hawthorne\hawthorne.vcxproj">
+      <Project>{afc041a2-9efd-428f-8c73-2823b14c25e1}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

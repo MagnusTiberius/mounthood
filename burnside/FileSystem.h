@@ -72,6 +72,8 @@ namespace burnside {
 			BYTE *bitmap;
 		} BITMAP, *LPBITMAP;
 
+
+	public:
 		VOID SetFileName(_In_ LPCTSTR name);
 		VOID Initialize(_In_ LPCTSTR name, _In_ DWORD dwSzie);
 		const LPSUPERBLOCK Allocate(_In_ DWORD dwSzie);
@@ -79,28 +81,13 @@ namespace burnside {
 		VOID ReadInode(_In_ LPINODE lpNode, _In_ DWORD dwIndex);
 		VOID WriteInode(_In_ LPINODE lpNode, _In_ DWORD dwIndex);
 
-		VOID CreateTable(_In_ LPCTSTR name)
-		{
-			INODE inode;
-			Reserve(&inode);
-		}
-
-		VOID Reserve(LPINODE inode)
-		{
-
-		}
-
-		VOID GetFreeInode()
-		{
-
-		}
-
 		VOID ReadBitmap(_Out_ LPBITMAP lpBitmap, _In_ DWORD dwSize, _In_ DWORD dwStartAddress);
 		VOID WriteBitmapBits(_In_ std::vector<BYTE> *list, _In_ DWORD dwStartAddress);
+		VOID Start();
+		VOID Start(_In_ LPCTSTR name);
 
 		static DWORD WINAPI ServerWorkerThread(LPVOID CompletionPortID);
 
-		VOID Start();
 
 	private:
 		SUPERBLOCK superBlock;
