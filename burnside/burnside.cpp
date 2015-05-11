@@ -6,10 +6,10 @@
 
 
 // This is an example of an exported variable
-BURNSIDE_API int nburnside=0;
+BURNSIDE_DECL_API int nburnside = 0;
 
 // This is an example of an exported function.
-BURNSIDE_API int fnburnside(void)
+BURNSIDE_DECL_API int fnburnside(void)
 {
 	return 42;
 }

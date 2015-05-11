@@ -7,7 +7,7 @@
 
 namespace burnside {
 
-	class DECL_API FileController : public FileSemantic
+	class BURNSIDE_DECL_API FileController : public FileSemantic
 	{
 	public:
 		FileController();

@@ -122,6 +122,8 @@ namespace burnside {
 		else
 			printf("connect() is pretty damn fine!\n");
 
+		return 0;
+
 	}
 
 

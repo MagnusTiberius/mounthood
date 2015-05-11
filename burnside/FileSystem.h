@@ -6,7 +6,7 @@
 
 namespace burnside {
 
-	class DECL_API FileSystem
+	class BURNSIDE_DECL_API FileSystem
 	{
 	public:
 		FileSystem();

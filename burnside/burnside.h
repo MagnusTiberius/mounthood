@@ -4,19 +4,15 @@
 // that uses this DLL. This way any other project whose source files include this file see 
 // BURNSIDE_API functions as being imported from a DLL, whereas this DLL sees symbols
 // defined with this macro as being exported.
-#ifdef BURNSIDE_EXPORTS
-#define BURNSIDE_API __declspec(dllexport)
-#else
-#define BURNSIDE_API __declspec(dllimport)
-#endif
+#include "stdafx.h"
 
 // This class is exported from the burnside.dll
-class BURNSIDE_API Cburnside {
+class BURNSIDE_DECL_API Cburnside {
 public:
 	Cburnside(void);
 	// TODO: add your methods here.
 };
 
-extern BURNSIDE_API int nburnside;
+extern BURNSIDE_DECL_API int nburnside;
 
-BURNSIDE_API int fnburnside(void);
+BURNSIDE_DECL_API int fnburnside(void);

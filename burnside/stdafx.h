@@ -20,10 +20,12 @@
 #include <cassert>
 #include <assert.h> 
 
-#ifdef BURNSIDE_EXPORTS
-#define DECL_API __declspec(dllexport)
-#else
-#define DECL_API __declspec(dllimport)
-#endif
+
+
+//#ifdef BURNSIDE_EXPORTS
+#define BURNSIDE_DECL_API __declspec(dllexport)
+//#else
+//#define BURNSIDE_DECL_API __declspec(dllimport)
+//#endif
 
 // TODO: reference additional headers your program requires here

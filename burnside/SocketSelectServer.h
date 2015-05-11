@@ -11,7 +11,7 @@
 namespace burnside {
 
 
-	class DECL_API SocketSelectServer
+	class BURNSIDE_DECL_API SocketSelectServer
 	{
 	public:
 		SocketSelectServer();

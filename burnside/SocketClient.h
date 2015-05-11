@@ -2,9 +2,6 @@
 #include <winsock2.h>
 #include <windows.h>
 
-
-#define  _WINSOCK_DEPRECATED_NO_WARNINGS
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -17,7 +14,7 @@
 
 namespace burnside {
 
-	class DECL_API SocketClient
+	class BURNSIDE_DECL_API SocketClient
 	{
 	public:
 		SocketClient();

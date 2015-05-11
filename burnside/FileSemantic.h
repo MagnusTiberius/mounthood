@@ -4,7 +4,7 @@
 
 namespace burnside {
 
-	class DECL_API FileSemantic
+	class BURNSIDE_DECL_API FileSemantic
 	{
 	public:
 		FileSemantic();
