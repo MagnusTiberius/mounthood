@@ -88,7 +88,7 @@ namespace burnside {
 	}
 
 
-	VOID FileSystem::ReadInode(_In_ LPINODE lpNode, _In_ DWORD dwIndex)
+	VOID FileSystem::ReadInode(_Out_ LPINODE lpNode, _In_ DWORD dwIndex)
 	{
 		DWORD displacement = dwIndex * sizeof(INODE);
 		DWORD effectiveAddress = superBlock.dwINodeStartAddress + displacement;
@@ -104,6 +104,67 @@ namespace burnside {
 		fc.Open(m_fileName);
 		fc.Write(lpNode, sizeof(INODE), effectiveAddress);
 		fc.Close();
+	}
+
+	VOID FileSystem::ReadBitmap(_Out_ LPBITMAP lpBitmap, _In_ DWORD dwSize, _In_ DWORD dwStartAddress)
+	{
+		fc.Open(m_fileName);
+		fc.Read(lpBitmap, dwSize, dwStartAddress);
+		fc.Close();
+	}
+
+	VOID FileSystem::WriteBitmapBits(_In_ std::vector<BYTE> *list, _In_ DWORD dwStartAddress)
+	{
+		std::vector<BYTE>::iterator it;
+		BYTE buffer[1];
+		DWORD dwSize = 1;
+		fc.Open(m_fileName);
+		for (it = list->begin(); it != list->end(); it++)
+		{
+			auto value = *it;
+			memcpy_s(&buffer[1], 1, &value, 1);
+		}
+		fc.Write(buffer, dwSize, dwStartAddress);
+		fc.Close();
+	}
+
+	VOID FileSystem::Start()
+	{
+		DWORD dwThreadId = GetCurrentThreadId();
+		int i;
+
+		fc.Open(m_fileName);
+		fc.Write(&superBlock, sizeof(SUPERBLOCK), 0);
+
+		GetSystemInfo(&SysInfo);
+
+		int nThreads = (int)SysInfo.dwNumberOfProcessors * 2;
+		nThreads = 2;
+
+		for (i = 0; i < nThreads; i++)
+		{
+
+			if ((ThreadHandle = CreateThread(NULL, 0, ServerWorkerThread, this, 0, &ThreadID)) == NULL)
+			{
+				fprintf(stderr, "%d::CreateThread() failed with error %d\n", dwThreadId, GetLastError());
+				return;
+			}
+			else
+				fprintf(stderr, "%d::CreateThread() is OK!\n", dwThreadId);
+
+			CloseHandle(ThreadHandle);
+		}
+
+	}
+
+	DWORD WINAPI FileSystem::ServerWorkerThread(LPVOID lpObject)
+	{
+
+		while (TRUE)
+		{
+
+		}
+
 	}
 
 }

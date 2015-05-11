@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "FileController.h"
 #include "FileSemantic.h"
+#include <vector>
 
 namespace burnside {
 
@@ -67,6 +68,10 @@ namespace burnside {
 			SUPERBLOCK SuperBlock;
 		} FILESYSTEM, *LPFILESYSTEM;
 
+		typedef struct Bitmap_s {
+			BYTE *bitmap;
+		} BITMAP, *LPBITMAP;
+
 		VOID SetFileName(_In_ LPCTSTR name);
 		VOID Initialize(_In_ LPCTSTR name, _In_ DWORD dwSzie);
 		const LPSUPERBLOCK Allocate(_In_ DWORD dwSzie);
@@ -90,6 +95,13 @@ namespace burnside {
 
 		}
 
+		VOID ReadBitmap(_Out_ LPBITMAP lpBitmap, _In_ DWORD dwSize, _In_ DWORD dwStartAddress);
+		VOID WriteBitmapBits(_In_ std::vector<BYTE> *list, _In_ DWORD dwStartAddress);
+
+		static DWORD WINAPI ServerWorkerThread(LPVOID CompletionPortID);
+
+		VOID Start();
+
 	private:
 		SUPERBLOCK superBlock;
 		FileController fc;
@@ -98,6 +110,10 @@ namespace burnside {
 		DWORD dwGrowBySize;
 		SYSTEM_INFO SysInfo;
 		DWORD dwSysGran;
+
+		LPBITMAP lpInodeBitmap;
+		HANDLE ThreadHandle;
+		DWORD ThreadID;
 	};
 
 }
