@@ -53,8 +53,15 @@ namespace burnside {
 			DWORD bIsLocked;
 			DWORD dwReaderCount;
 			DWORD dwWriterWaitingFlag;
+			DWORD nextInode;
 		} INODE, *LPINODE;
 
+
+		typedef struct FileList_s {
+			DWORD dwID;
+			DWORD dwInodeID;
+			TCHAR szName[256];
+		} FILELIST, *LPFILELIST;
 
 		typedef struct FileSystem_s {
 			SUPERBLOCK SuperBlock;
@@ -67,6 +74,22 @@ namespace burnside {
 		const LPSUPERBLOCK Allocate(_In_ DWORD dwSzie);
 
 		VOID GrowBy(_In_ DWORD dwSize);
+
+		VOID CreateTable(_In_ LPCTSTR name)
+		{
+			INODE inode;
+			Reserve(&inode);
+		}
+
+		VOID Reserve(LPINODE inode)
+		{
+
+		}
+
+		VOID GetFreeInode()
+		{
+
+		}
 
 	private:
 		SUPERBLOCK superBlock;
