@@ -22,10 +22,4 @@
 
 
 
-#ifdef BURNSIDE_EXPORTS
-#define BURNSIDE_DECL_API __declspec(dllexport)
-#else
-#define BURNSIDE_DECL_API __declspec(dllimport)
-#endif
-
 // TODO: reference additional headers your program requires here

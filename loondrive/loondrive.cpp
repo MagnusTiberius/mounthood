@@ -10,7 +10,7 @@
 #include "FileSystem.h"
 #include "Test1.h"
 
-#define TESTDB1 L"TestDB1"
+#define TESTDB1 _T("TestDB1")
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -18,11 +18,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	//test1.Run1();
 
 
-	::burnside::FileSystem fs;
+	::brookwood::FileSystem fs;
 
-	burnside::FileSystem::LPSUPERBLOCK lpBlock = fs.Allocate(1024 * 1024);
+	brookwood::FileSystem::LPSUPERBLOCK lpBlock = fs.Allocate(1024 * 1024);
 	//fs.Initialize(TESTDB1, 2000000);
-	fs.Start(TESTDB1);
+	fs.StartSystem(L"TestDB1");
 
 	exit(0);
 

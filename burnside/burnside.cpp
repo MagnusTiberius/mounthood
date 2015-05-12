@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include "burnside.h"
 
-
 // This is an example of an exported variable
 BURNSIDE_DECL_API int nburnside = 0;
 

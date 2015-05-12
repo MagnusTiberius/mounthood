@@ -5,6 +5,7 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loondrive", "loondrive\loondrive.vcxproj", "{EED547A1-4804-4EFC-9B4E-F7EC4D5844FD}"
 	ProjectSection(ProjectDependencies) = postProject
+		{611A24A2-0FC5-46D3-835E-47A787894F37} = {611A24A2-0FC5-46D3-835E-47A787894F37}
 		{BE0A0CB2-9727-403A-B6EB-8D9B8BF63FBD} = {BE0A0CB2-9727-403A-B6EB-8D9B8BF63FBD}
 	EndProjectSection
 EndProject
@@ -13,6 +14,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "burnside", "burnside\burnside.vcxproj", "{0A7EEF33-B1A3-48CA-9EA4-4954B64B8521}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hawthorne", "hawthorne\hawthorne.vcxproj", "{AFC041A2-9EFD-428F-8C73-2823B14C25E1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "brookwood", "brookwood\brookwood.vcxproj", "{611A24A2-0FC5-46D3-835E-47A787894F37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +39,10 @@ Global
 		{AFC041A2-9EFD-428F-8C73-2823B14C25E1}.Debug|Win32.Build.0 = Debug|Win32
 		{AFC041A2-9EFD-428F-8C73-2823B14C25E1}.Release|Win32.ActiveCfg = Release|Win32
 		{AFC041A2-9EFD-428F-8C73-2823B14C25E1}.Release|Win32.Build.0 = Release|Win32
+		{611A24A2-0FC5-46D3-835E-47A787894F37}.Debug|Win32.ActiveCfg = Debug|Win32
+		{611A24A2-0FC5-46D3-835E-47A787894F37}.Debug|Win32.Build.0 = Debug|Win32
+		{611A24A2-0FC5-46D3-835E-47A787894F37}.Release|Win32.ActiveCfg = Release|Win32
+		{611A24A2-0FC5-46D3-835E-47A787894F37}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
