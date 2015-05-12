@@ -39,7 +39,8 @@ namespace burnside {
 			DWORD	Location;
 		} CONNECTED_ENTITY_INFORMATION, *LPCONNECTED_ENTITY_INFORMATION;
 		LPCONNECTED_ENTITY_INFORMATION ConnectedEntityArray[SOCKET_ARRAY_SZ];   //FD_SETSIZE
-
+		VOID Start();
+		DWORD WINAPI ServerWorkerThread(LPVOID lpObject);
 
 
 	public:
@@ -49,6 +50,9 @@ namespace burnside {
 	private:
 		BOOL CreateSocketInformation(SOCKET s);
 		void FreeSocketInformation(DWORD Index);
+		HANDLE ThreadHandle;
+		DWORD ThreadID;
+		SYSTEM_INFO SysInfo;
 	};
 
 

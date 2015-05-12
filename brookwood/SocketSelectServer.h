@@ -45,10 +45,15 @@ namespace brookwood {
 	public:
 		int Init(u_short portnum);
 		virtual void Request(LPSOCKET_INFORMATION pSocketInfo);
-
+		VOID Start();
+		static DWORD WINAPI ServerWorkerThread(LPVOID lpObject);
 	private:
 		BOOL CreateSocketInformation(SOCKET s);
 		void FreeSocketInformation(DWORD Index);
+
+		HANDLE ThreadHandle;
+		DWORD ThreadID;
+		SYSTEM_INFO SysInfo;
 	};
 
 

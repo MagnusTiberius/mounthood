@@ -337,4 +337,39 @@ namespace burnside {
 	}
 
 
+	//VOID SocketSelectServer::Start()
+	//{
+	//	DWORD dwThreadId = GetCurrentThreadId();
+	//	int i;
+
+
+	//	int nThreads = (int)SysInfo.dwNumberOfProcessors * 2;
+	//	nThreads = 2;
+
+	//	for (i = 0; i < nThreads; i++)
+	//	{
+	//		ThreadHandle = CreateThread(NULL, 0, ServerWorkerThread, this, 0, &ThreadID);
+	//		if (ThreadHandle == NULL)
+	//		{
+	//			fprintf(stderr, "%d::CreateThread() failed with error %d\n", dwThreadId, GetLastError());
+	//			return;
+	//		}
+	//		else
+	//			fprintf(stderr, "%d::CreateThread() is OK!\n", dwThreadId);
+
+	//		CloseHandle(ThreadHandle);
+	//	}
+
+	//}
+
+	//DWORD WINAPI SocketSelectServer::ServerWorkerThread(LPVOID lpObject)
+	//{
+	//	SocketSelectServer *srv = (SocketSelectServer*)lpObject;
+	//	while (TRUE)
+	//	{
+
+	//	}
+
+	//}
+
 }

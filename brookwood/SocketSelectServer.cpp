@@ -336,5 +336,46 @@ namespace brookwood {
 		TotalSockets--;
 	}
 
+	VOID SocketSelectServer::Start()
+	{
+		DWORD dwThreadId = GetCurrentThreadId();
+		int i;
+
+
+		int nThreads = (int)SysInfo.dwNumberOfProcessors * 2;
+		nThreads = 2;
+
+		HANDLE ThreadHandle[2];
+
+		for (i = 0; i < nThreads; i++)
+		{
+			ThreadHandle[i] = CreateThread(NULL, 0, ServerWorkerThread, this, 0, &ThreadID);
+			if (ThreadHandle[i] == NULL)
+			{
+				fprintf(stderr, "%d::CreateThread() failed with error %d\n", dwThreadId, GetLastError());
+				return;
+			}
+			else
+				fprintf(stderr, "%d::CreateThread() is OK!\n", dwThreadId);
+
+			::WaitForMultipleObjects(nThreads, ThreadHandle, true, INFINITE);
+
+			for (i = 0; i < nThreads; i++)
+			{
+				CloseHandle(ThreadHandle[i]);
+			}
+		}
+
+	}
+
+	DWORD WINAPI SocketSelectServer::ServerWorkerThread(LPVOID lpObject)
+	{
+		SocketSelectServer *srv = (SocketSelectServer*)lpObject;
+		while (TRUE)
+		{
+
+		}
+
+	}
 
 }
