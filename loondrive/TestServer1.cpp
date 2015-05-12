@@ -46,10 +46,10 @@ DWORD WINAPI TestServer1::ServerWorkerThread(LPVOID lpObject)
 {
 	TestServer1 *srv = (TestServer1*)lpObject;
 	auto socketSrv = srv->GetSocketServer();
-	while (TRUE)
-	{
+	//while (TRUE)
+	//{
 		socketSrv->Init(9099);
-	}
-
+	//}
+		return 0;
 }
 

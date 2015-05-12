@@ -161,11 +161,11 @@ namespace brookwood {
 				fprintf(stderr, "%d::CreateThread() is OK!\n", dwThreadId);
 
 		}
-		::WaitForMultipleObjects(2, hThreads, true, INFINITE);
-		for (i = 0; i < nThreads; i++)
-		{
-			CloseHandle(hThreads[i]);
-		}
+		//::WaitForMultipleObjects(2, hThreads, true, INFINITE);
+		//for (i = 0; i < nThreads; i++)
+		//{
+		//	CloseHandle(hThreads[i]);
+		//}
 	}
 
 	DWORD WINAPI FileSystem::ServerWorkerThread(LPVOID lpObject)
@@ -173,7 +173,7 @@ namespace brookwood {
 		FileSystem *fs = (FileSystem*)lpObject;
 		while (!fs->IsQuitting())
 		{
-			printf(".");
+			//printf(".");
 		}
 		return 0;
 	}

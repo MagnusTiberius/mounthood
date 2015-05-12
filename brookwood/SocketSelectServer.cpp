@@ -258,7 +258,7 @@ namespace brookwood {
 		pSocketInfo->BufferOut;
 
 		memset(pSocketInfo->BufferOut, '\0', DATA_BUFSIZE);
-		const char* body = "<html><h1>KLARIS WEB SERVER IS UP</h1><br><hr></html>\n";
+		const char* body = "<html><h1>KLARIS DATABASE SERVER IS UP</h1><br><hr></html>\n";
 		int bodylen = strlen(body);
 
 
@@ -336,16 +336,16 @@ namespace brookwood {
 		TotalSockets--;
 	}
 
-	VOID SocketSelectServer::Start()
+	VOID SocketSelectServer::StartSocketServer()
 	{
 		DWORD dwThreadId = GetCurrentThreadId();
 		int i;
 
 
 		int nThreads = (int)SysInfo.dwNumberOfProcessors * 2;
-		nThreads = 2;
+		nThreads = 1;
 
-		HANDLE ThreadHandle[2];
+		HANDLE ThreadHandle[1];
 
 		for (i = 0; i < nThreads; i++)
 		{
@@ -358,12 +358,12 @@ namespace brookwood {
 			else
 				fprintf(stderr, "%d::CreateThread() is OK!\n", dwThreadId);
 
-			::WaitForMultipleObjects(nThreads, ThreadHandle, true, INFINITE);
+			//::WaitForMultipleObjects(nThreads, ThreadHandle, true, INFINITE);
 
-			for (i = 0; i < nThreads; i++)
-			{
-				CloseHandle(ThreadHandle[i]);
-			}
+			//for (i = 0; i < nThreads; i++)
+			//{
+			//	CloseHandle(ThreadHandle[i]);
+			//}
 		}
 
 	}
@@ -371,11 +371,12 @@ namespace brookwood {
 	DWORD WINAPI SocketSelectServer::ServerWorkerThread(LPVOID lpObject)
 	{
 		SocketSelectServer *srv = (SocketSelectServer*)lpObject;
-		while (TRUE)
-		{
+		//while (TRUE)
+		//{
 
-		}
-
+		//}
+		srv->Init(9099);
+		return 0;
 	}
 
 }
