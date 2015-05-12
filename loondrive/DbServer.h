@@ -13,6 +13,11 @@ public:
 	DbServer();
 	~DbServer();
 
+	virtual void HandleRequest(LPSOCKET_INFORMATION pSocketInfo)
+	{
+		CHAR *msg = pSocketInfo->DataBuf.buf;
+	}
+
 	void Start()
 	{
 		StartSystem(L"TestDB1");

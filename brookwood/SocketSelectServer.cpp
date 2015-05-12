@@ -207,7 +207,7 @@ namespace brookwood {
 						}
 						else
 						{
-							Request(SocketInfo);
+							HandleRequest(SocketInfo);
 						}
 					}
 				}
@@ -251,7 +251,7 @@ namespace brookwood {
 		}
 	}
 
-	void SocketSelectServer::Request(LPSOCKET_INFORMATION pSocketInfo)
+	void SocketSelectServer::HandleRequest(LPSOCKET_INFORMATION pSocketInfo)
 	{
 		printf("Recv:\n%s\n", pSocketInfo->DataBuf.buf);
 
