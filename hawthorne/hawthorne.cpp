@@ -8,17 +8,17 @@
 #include "Bitmap.h"
 #include "Inode.h"
 #include "FileSystem.h"
-
+#include "SocketSelectServer.h"
+#include "SocketClient.h"
 
 #define TESTDB1 L"TestDB1"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	::burnside::FileSystem fs;
-
-	burnside::FileSystem::LPSUPERBLOCK lpBlock = fs.Allocate(1024 * 1024);
-	//fs.Initialize(TESTDB1, 2000000);
-	//fs.Start(TESTDB1);
+	brookwood::SocketClient socketClient;
+	socketClient.SetPort(9099);
+	socketClient.Connect();
+	socketClient.Send("CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20),species VARCHAR(20), sex CHAR(1), birth DATE, death DATE); ");
 
 	return 0;
 }

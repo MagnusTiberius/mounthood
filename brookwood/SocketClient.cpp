@@ -158,7 +158,7 @@ namespace brookwood {
 					break;
 				}
 				szBuffer[ret] = '\0';
-				//printf("recv() is OK. Received %d bytes: %s\n", ret, szBuffer);
+				printf("recv() is OK. Received %d bytes: %s\n", ret, szBuffer);
 			}
 		}
 

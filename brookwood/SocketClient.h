@@ -39,7 +39,13 @@ namespace brookwood {
 		void ValidateArgs(int argc, char **argv);
 		//int Run(int argc, char **argv);
 
+
+
 	public:
+		void SetPort(int portNum)
+		{
+			iPort = portNum;
+		}
 
 		void Send(const char *msg);
 		int Connect();

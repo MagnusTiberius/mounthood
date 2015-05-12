@@ -253,21 +253,21 @@ namespace brookwood {
 
 	void SocketSelectServer::Request(LPSOCKET_INFORMATION pSocketInfo)
 	{
-		//printf("Recv:\n%s\n", pSocketInfo->DataBuf.buf);
+		printf("Recv:\n%s\n", pSocketInfo->DataBuf.buf);
 
-		//pSocketInfo->BufferOut;
+		pSocketInfo->BufferOut;
 
-		//memset(pSocketInfo->BufferOut, '\0', DATA_BUFSIZE);
-		//const char* body = "<html><h1>KLARIS WEB SERVER IS UP</h1><br><hr></html>\n";
-		//int bodylen = strlen(body);
+		memset(pSocketInfo->BufferOut, '\0', DATA_BUFSIZE);
+		const char* body = "<html><h1>KLARIS WEB SERVER IS UP</h1><br><hr></html>\n";
+		int bodylen = strlen(body);
 
 
-		//char content[DATA_BUFSIZE];
-		//memset(content, '\0', DATA_BUFSIZE);
-		//sprintf_s(content, DATA_BUFSIZE, "HTTP/1.0 200 OK\nDate: Fri, 31 Dec 1999 23:59:59 GMT\nContent-Type: text/html\nContent-Length: %d\n\n%s", bodylen, body);
+		char content[DATA_BUFSIZE];
+		memset(content, '\0', DATA_BUFSIZE);
+		sprintf_s(content, DATA_BUFSIZE, "HTTP/1.0 200 OK\nDate: Fri, 31 Dec 1999 23:59:59 GMT\nContent-Type: text/html\nContent-Length: %d\n\n%s", bodylen, body);
 
-		//sprintf_s(pSocketInfo->BufferOut, DATA_BUFSIZE, "%s", content);
-		//pSocketInfo->BytesSEND = strlen(pSocketInfo->BufferOut);
+		sprintf_s(pSocketInfo->BufferOut, DATA_BUFSIZE, "%s", content);
+		pSocketInfo->BytesSEND = strlen(pSocketInfo->BufferOut);
 
 	}
 
