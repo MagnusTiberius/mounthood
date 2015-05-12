@@ -4,6 +4,8 @@
 #include "FileSemantic.h"
 #include <vector>
 
+#define NTHREADS 3
+
 namespace brookwood {
 
 	class FileSystem
@@ -88,6 +90,10 @@ namespace brookwood {
 
 		static DWORD WINAPI ServerWorkerThread(LPVOID CompletionPortID);
 
+		bool IsQuitting()
+		{
+			return isQuitting;
+		}
 
 	private:
 		SUPERBLOCK superBlock;
@@ -101,6 +107,7 @@ namespace brookwood {
 		LPBITMAP lpInodeBitmap;
 		HANDLE ThreadHandle;
 		DWORD ThreadID;
+		bool isQuitting;
 	};
 
 }

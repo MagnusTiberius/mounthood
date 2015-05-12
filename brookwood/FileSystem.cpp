@@ -7,6 +7,7 @@ namespace brookwood {
 	{
 		GetSystemInfo(&SysInfo);
 		dwSysGran = SysInfo.dwAllocationGranularity;
+		isQuitting = false;
 	}
 
 
@@ -139,17 +140,19 @@ namespace brookwood {
 		int i;
 
 		fc.Open(m_fileName);
-		fc.Write(&superBlock, sizeof(SUPERBLOCK), 0);
+		fc.Read(&superBlock, sizeof(SUPERBLOCK), 0);
 
 		GetSystemInfo(&SysInfo);
 
 		int nThreads = (int)SysInfo.dwNumberOfProcessors * 2;
-		nThreads = 2;
+		nThreads = NTHREADS;
+
+		HANDLE hThreads[NTHREADS];
 
 		for (i = 0; i < nThreads; i++)
 		{
-			ThreadHandle = CreateThread(NULL, 0, ServerWorkerThread, this, 0, &ThreadID);
-			if (ThreadHandle == NULL)
+			hThreads[i] = CreateThread(NULL, 0, ServerWorkerThread, this, 0, &ThreadID);
+			if (hThreads[i] == NULL)
 			{
 				fprintf(stderr, "%d::CreateThread() failed with error %d\n", dwThreadId, GetLastError());
 				return;
@@ -157,19 +160,22 @@ namespace brookwood {
 			else
 				fprintf(stderr, "%d::CreateThread() is OK!\n", dwThreadId);
 
-			CloseHandle(ThreadHandle);
 		}
-
+		::WaitForMultipleObjects(2, hThreads, true, INFINITE);
+		for (i = 0; i < nThreads; i++)
+		{
+			CloseHandle(hThreads[i]);
+		}
 	}
 
 	DWORD WINAPI FileSystem::ServerWorkerThread(LPVOID lpObject)
 	{
 		FileSystem *fs = (FileSystem*)lpObject;
-		while (TRUE)
+		while (!fs->IsQuitting())
 		{
-
+			printf(".");
 		}
-
+		return 0;
 	}
 
 }
