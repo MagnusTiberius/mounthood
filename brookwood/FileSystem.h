@@ -75,6 +75,16 @@ namespace brookwood {
 		} BITMAP, *LPBITMAP;
 
 
+		typedef struct TaskRequest_s {
+			CHAR *request;
+			size_t requestLength;
+			CHAR *reply;
+			size_t replyLength;
+			SOCKET Socket;
+		} TASKREQUEST, *LPTASKREQUEST;
+
+		typedef std::deque<TASKREQUEST> STACKTASKREQUEST;
+
 	public:
 		VOID SetFileName(_In_ TCHAR *name);
 		VOID Initialize(_In_ TCHAR *name, _In_ DWORD dwSzie);
@@ -93,6 +103,15 @@ namespace brookwood {
 		bool IsQuitting()
 		{
 			return isQuitting;
+		}
+
+		HANDLE ghWriteEvent;
+		HANDLE ghTaskQueueNotEmpty;
+		HANDLE ghMutex;
+
+		virtual VOID PopTaskRequest(_Out_ LPVOID lpTaskRequest)
+		{
+			printf("virtual proc\n");
 		}
 
 	private:

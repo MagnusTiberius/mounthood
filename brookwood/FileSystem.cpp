@@ -8,6 +8,11 @@ namespace brookwood {
 		GetSystemInfo(&SysInfo);
 		dwSysGran = SysInfo.dwAllocationGranularity;
 		isQuitting = false;
+
+		ghWriteEvent = CreateEvent(NULL, TRUE, FALSE, TEXT("FileSystemWriteEvent"));
+		ghTaskQueueNotEmpty = CreateEvent(NULL, TRUE, FALSE, TEXT("TaskQueueNotEmpty"));
+
+		ghMutex = CreateMutex(NULL, FALSE,	NULL);   
 	}
 
 
@@ -170,10 +175,32 @@ namespace brookwood {
 
 	DWORD WINAPI FileSystem::ServerWorkerThread(LPVOID lpObject)
 	{
+		HANDLE hWaitable[2];
+		DWORD dwWaitResult, dwWaitResult1, dwWaitResult2;
+		LPTASKREQUEST trq = NULL;
 		FileSystem *fs = (FileSystem*)lpObject;
 		while (!fs->IsQuitting())
 		{
-			//printf(".");
+			hWaitable[0] = fs->ghTaskQueueNotEmpty;
+			hWaitable[1] = fs->ghMutex;
+
+			//dwWaitResult = WaitForMultipleObjects(2, hWaitable, FALSE, INFINITE);
+			dwWaitResult1 = WaitForSingleObject(fs->ghTaskQueueNotEmpty, INFINITE);
+			dwWaitResult2 = WaitForSingleObject(fs->ghMutex, INFINITE);
+			dwWaitResult = dwWaitResult1 + dwWaitResult2;
+			switch (dwWaitResult)
+			{
+			case WAIT_OBJECT_0:
+			case WAIT_OBJECT_0 + 1:
+				printf("Thread %d reading from buffer\n", GetCurrentThreadId());
+				trq = (LPTASKREQUEST)malloc(sizeof(TASKREQUEST));
+				memset(trq, 0, sizeof(TASKREQUEST));
+				fs->PopTaskRequest((LPVOID)trq);
+				break;
+			default:
+				printf("Wait error (%d)\n", GetLastError());
+				return 0;
+			}
 		}
 		return 0;
 	}
