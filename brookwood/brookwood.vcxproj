@@ -95,6 +95,7 @@
     <ClInclude Include="FileController.h" />
     <ClInclude Include="FileSemantic.h" />
     <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="Heap.h" />
     <ClInclude Include="SocketClient.h" />
     <ClInclude Include="SocketSelectServer.h" />
     <ClInclude Include="stdafx.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="FileController.cpp" />
     <ClCompile Include="FileSemantic.cpp" />
     <ClCompile Include="FileSystem.cpp" />
+    <ClCompile Include="Heap.cpp" />
     <ClCompile Include="SocketClient.cpp" />
     <ClCompile Include="SocketSelectServer.cpp" />
     <ClCompile Include="stdafx.cpp" />
