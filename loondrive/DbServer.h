@@ -18,7 +18,7 @@ public:
 	{
 		CHAR *msg = pSocketInfo->DataBuf.buf;
 		ULONG len = pSocketInfo->DataBuf.len;
-		PushTaskRequest(msg, len, pSocketInfo->Socket);
+		PushTaskRequest(msg, len, pSocketInfo->Socket, pSocketInfo);
 		memset(&pSocketInfo->BufferOut, 0, DATA_BUFSIZE);
 		memcpy_s(&pSocketInfo->BufferOut, len, pSocketInfo->DataBuf.buf, len);
 		pSocketInfo->DataBufOut.buf = pSocketInfo->BufferOut;
@@ -36,7 +36,7 @@ public:
 		}
 	}
 
-	VOID PushTaskRequest(CHAR *requestMsg, ULONG len, SOCKET Socket)
+	VOID PushTaskRequest(CHAR *requestMsg, ULONG len, SOCKET Socket, LPSOCKET_INFORMATION pSocketInfo)
 	{
 		bool isEmpty = false;
 		TASKREQUEST req;
@@ -46,6 +46,7 @@ public:
 		req.request = _strdup(requestMsg);
 		req.requestLength = strlen(req.request);
 		req.Socket = Socket;
+		req.lpSocketInfo = (LPVOID)pSocketInfo;
 		if (stackTaskRequest.size() == 0)
 		{
 			isEmpty = true;

@@ -81,6 +81,7 @@ namespace brookwood {
 			CHAR *reply;
 			size_t replyLength;
 			SOCKET Socket;
+			LPVOID lpSocketInfo;
 		} TASKREQUEST, *LPTASKREQUEST;
 
 		typedef std::deque<TASKREQUEST> STACKTASKREQUEST;
