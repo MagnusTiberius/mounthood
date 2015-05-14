@@ -25,6 +25,7 @@ public:
 
 
 	void* Reserve(size_t size);
+	void* &operator[](int index);
 
 private:
 	void* AllocFromNode(LPNODE lpNode, size_t size);

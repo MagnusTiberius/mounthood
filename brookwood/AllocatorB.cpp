@@ -88,3 +88,24 @@ void* AllocatorB::AllocFromNode(LPNODE lpNode, size_t size)
 		return AllocFromNode(new_node, size);
 	}
 }
+
+void* &AllocatorB::operator[](int index)
+{
+	void* item = NULL;
+	int running_bitmap_count = 0;
+	LPNODE node = lpRootHeap;
+	while (node != NULL)
+	{
+		if (index >= running_bitmap_count)
+		{
+			if (index < running_bitmap_count + node->bitmap_count)
+			{
+				item = node->heap_block + (index * m_grain_size);
+				return item;
+			}
+		}
+		running_bitmap_count += node->bitmap_count;
+		node = node->next;
+	}
+	return item;
+}
