@@ -27,3 +27,6 @@ AppWizard uses "TODO:" comments to indicate parts of the source code you
 should add to or customize.
 
 /////////////////////////////////////////////////////////////////////////////
+
+Try to implement a heap so that allocate will have contiguous elements, making it cache friendly.
+
