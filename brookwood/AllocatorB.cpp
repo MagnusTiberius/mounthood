@@ -10,7 +10,7 @@ AllocatorB::AllocatorB(size_t item_size)
 	lpBackHeap = NULL;
 	m_grain_size = item_size;
 
-	arrgrw.initArray(sizeof(LPNODE));
+	arrgrw.InitArray(sizeof(LPNODE));
 
 	LPNODE node = New();
 	Add(node);
@@ -19,6 +19,7 @@ AllocatorB::AllocatorB(size_t item_size)
 
 AllocatorB::~AllocatorB()
 {
+	arrgrw.FreeArray();
 	LPNODE node = lpBackHeap;
 	while (node->prev != NULL)
 	{
@@ -64,7 +65,7 @@ AllocatorB::LPNODE AllocatorB::New()
 	//printf("lpNode: %d \n", (DWORD)lpNode);
 	//printf("addr: %d \n", (DWORD)addr);
 	LPNODE* ptr = &lpNode;
-	arrgrw.insertArray((void*)ptr);
+	arrgrw.PushBack((void*)ptr);
 	return lpNode;
 
 }

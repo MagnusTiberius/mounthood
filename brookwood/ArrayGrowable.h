@@ -10,7 +10,7 @@ public:
 	~ArrayGrowable();
 
 
-	void initArray(size_t elementSize) {
+	void InitArray(size_t elementSize) {
 		a = (Array*)malloc(sizeof(Array));
 		memset(a, 0, sizeof(Array));
 
@@ -22,7 +22,7 @@ public:
 		a->elemSize = elementSize;
 	}
 
-	void insertArray(void* element) {
+	void PushBack(void* element) {
 		if (a->used >= a->size) {
 			a->size += GROWTHINCREMENT;
 			a->array = (char *)realloc(a->array, a->size * a->elemSize);
@@ -40,7 +40,7 @@ public:
 		return elem;
 	}
 
-	void freeArray() {
+	void FreeArray() {
 		free(a->array);
 		a->array = NULL;
 		a->used = a->size = 0;
