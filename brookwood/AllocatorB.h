@@ -37,6 +37,7 @@ private:
 	LPNODE lpBackHeap;
 	size_t m_grain_size;
 	size_t index;
+	size_t count_per_node;
 	int ctr = 0;
 };
 

@@ -3,6 +3,8 @@
 
 AllocatorB::AllocatorB(size_t item_size)
 {
+	assert(BLOCKSIZE > item_size);
+	count_per_node = 0;
 	index = 0;
 	lpRootHeap = NULL;
 	lpBackHeap = NULL;
@@ -48,6 +50,7 @@ AllocatorB::LPNODE AllocatorB::New()
 	lpNode->heap_block = (char*)malloc(BLOCKSIZE);
 	memset(lpNode->heap_block, 0, BLOCKSIZE);
 	lpNode->bitmap_count = (BLOCKSIZE / m_grain_size);
+	count_per_node = lpNode->bitmap_count;
 	lpNode->bitmap = (char*)malloc(lpNode->bitmap_count);
 	memset(lpNode->bitmap, 0, lpNode->bitmap_count);
 	lpNode->next = NULL;
@@ -89,18 +92,45 @@ void* AllocatorB::AllocFromNode(LPNODE lpNode, size_t size)
 	}
 }
 
-void* &AllocatorB::operator[](int index)
+#define FAST1
+#ifdef FAST1
+void* &AllocatorB::operator[](int indexv)
 {
 	void* item = NULL;
+	int m_index = indexv;
+	int running_bitmap_count = 0;
+	LPNODE node = lpRootHeap;
+	int node_index = m_index / count_per_node;
+	while (node != NULL)
+	{
+		if (node->node_id == node_index)
+		{
+			m_index -= running_bitmap_count;
+			item = node->heap_block + (m_index * m_grain_size);
+			return item;
+		}
+		running_bitmap_count += node->bitmap_count;
+		node = node->next;
+	}
+	return item;
+}
+#endif
+
+#ifndef FAST1
+void* &AllocatorB::operator[](int indexv)
+{
+	void* item = NULL;
+	int m_index = indexv;
 	int running_bitmap_count = 0;
 	LPNODE node = lpRootHeap;
 	while (node != NULL)
 	{
-		if (index >= running_bitmap_count)
+		if (m_index >= running_bitmap_count)
 		{
-			if (index < running_bitmap_count + node->bitmap_count)
+			if (m_index < running_bitmap_count + node->bitmap_count)
 			{
-				item = node->heap_block + (index * m_grain_size);
+				m_index -= running_bitmap_count;
+				item = node->heap_block + (m_index * m_grain_size);
 				return item;
 			}
 		}
@@ -109,3 +139,4 @@ void* &AllocatorB::operator[](int index)
 	}
 	return item;
 }
+#endif
