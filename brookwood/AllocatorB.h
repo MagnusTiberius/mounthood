@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <Windows.h>
 #include "assert.h"
-
+#include "ArrayGrowable.h"
 
 #define BLOCKSIZE 4096
 
@@ -23,7 +23,6 @@ public:
 		size_t bitmap_count;
 	}NODE, *LPNODE;
 
-
 	void* Reserve();
 	void* &operator[](int index);
 
@@ -39,5 +38,6 @@ private:
 	size_t index;
 	size_t count_per_node;
 	int ctr = 0;
+	ArrayGrowable arrgrw;
 };
 

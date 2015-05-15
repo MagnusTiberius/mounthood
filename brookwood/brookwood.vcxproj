@@ -91,6 +91,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Allocator.h" />
     <ClInclude Include="AllocatorB.h" />
     <ClInclude Include="CircularBuffer.h" />
     <ClInclude Include="FileController.h" />
@@ -103,6 +104,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Allocator.cpp" />
     <ClCompile Include="AllocatorB.cpp" />
     <ClCompile Include="CircularBuffer.cpp" />
     <ClCompile Include="FileController.cpp" />
