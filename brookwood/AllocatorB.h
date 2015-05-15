@@ -24,7 +24,7 @@ public:
 	}NODE, *LPNODE;
 
 
-	void* Reserve(size_t size);
+	void* Reserve();
 	void* &operator[](int index);
 
 private:

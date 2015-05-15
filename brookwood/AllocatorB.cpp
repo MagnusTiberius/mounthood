@@ -58,9 +58,9 @@ AllocatorB::LPNODE AllocatorB::New()
 
 }
 
-void* AllocatorB::Reserve(size_t size)
+void* AllocatorB::Reserve()
 {
-	return AllocFromNode(lpRootHeap, size);
+	return AllocFromNode(lpRootHeap, m_grain_size);
 }
 
 void* AllocatorB::AllocFromNode(LPNODE lpNode, size_t size)
