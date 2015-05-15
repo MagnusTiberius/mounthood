@@ -60,7 +60,11 @@ AllocatorB::LPNODE AllocatorB::New()
 	lpNode->prev = NULL;
 	lpNode->allocated = 0;
 	lpNode->node_id = ctr++;
-	arrgrw.insertArray((void*)lpNode);
+	//DWORD addr = (DWORD)lpNode;
+	//printf("lpNode: %d \n", (DWORD)lpNode);
+	//printf("addr: %d \n", (DWORD)addr);
+	LPNODE* ptr = &lpNode;
+	arrgrw.insertArray((void*)ptr);
 	return lpNode;
 
 }
@@ -96,7 +100,7 @@ void* AllocatorB::AllocFromNode(LPNODE lpNode, size_t size)
 	}
 }
 
-#define FAST1
+#define FAST0
 #ifdef FAST0
 void* &AllocatorB::operator[](int indexv)
 {
@@ -104,7 +108,8 @@ void* &AllocatorB::operator[](int indexv)
 	int m_index = indexv;
 	int running_bitmap_count = 0;
 	int node_index = m_index / count_per_node;
-	LPNODE node = (LPNODE)arrgrw[node_index];
+	LPNODE *pptr = (LPNODE*)arrgrw[node_index];
+	LPNODE node = *pptr;
 	running_bitmap_count = node_index * node->bitmap_count;
 	m_index -= running_bitmap_count;
 	item = node->heap_block + (m_index * m_grain_size);

@@ -33,9 +33,10 @@ public:
 	}
 
 
-	void* operator[](int index)
+	void* &operator[](int index)
 	{
-		auto elem = a->array + (index * a->elemSize);
+		//auto elem = a->array + (index * a->elemSize);
+		auto elem = (void*)&a->array[index * a->elemSize];
 		return elem;
 	}
 
